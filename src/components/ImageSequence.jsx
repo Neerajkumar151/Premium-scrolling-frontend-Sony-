@@ -88,124 +88,152 @@
 
 
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useMotionValueEvent, useScroll, useTransform } from 'framer-motion';
 
 export default function ImageSequence({ containerRef, onLoadProgress }) {
   const canvasRef = useRef(null);
   const [images, setImages] = useState([]);
-  const frameCount = 240; 
+  const lastFrameRef = useRef(-1); // Track last rendered frame to avoid redundant draws
+  const rafIdRef = useRef(null); // For requestAnimationFrame throttling
+  const pendingFrameRef = useRef(null); // Store pending frame to render
+  
+  // Only load alternate frames: 1, 3, 5, ..., 239 (120 frames total)
+  const frameIndices = useRef(
+    Array.from({ length: 120 }, (_, i) => i * 2 + 1)
+  ).current;
+  const totalLoadedFrames = frameIndices.length;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // Map scroll progress (0 to 1) to frame index (0 to 239)
-  const frameIndex = useTransform(scrollYProgress, [0, 1], [0, frameCount - 1]);
+  // Map scroll progress to our loaded frame array index (0 to 119)
+  const frameIndex = useTransform(scrollYProgress, [0, 1], [0, totalLoadedFrames - 1]);
 
-  // 1. Preload Images & Report Progress
+  // Preload only alternate frames & report progress
   useEffect(() => {
     let loadedCount = 0;
-    const loadedImages = [];
+    const loadedImages = new Array(totalLoadedFrames);
     const promises = [];
 
-    for (let i = 1; i <= frameCount; i++) {
-        const promise = new Promise((resolve) => {
-            const img = new Image();
-            // Ensure your source images are actually 1080p+ for best results
-            const paddedIndex = i.toString().padStart(3, '0');
-            img.src = `/sequence/ezgif-frame-${paddedIndex}.jpg`;
-            
-            img.onload = () => {
-                loadedCount++;
-                // Report progress percentage to parent
-                if (onLoadProgress) {
-                    onLoadProgress(Math.round((loadedCount / frameCount) * 100));
-                }
-                resolve(img);
-            };
-            // Handle errors gracefully so one bad image doesn't break the app
-            img.onerror = () => {
-                loadedCount++;
-                if (onLoadProgress) onLoadProgress(Math.round((loadedCount / frameCount) * 100));
-                resolve(null); // Resolve with null to keep order index correct
-            };
-            loadedImages[i - 1] = img; // Store in index order
-        });
-        promises.push(promise);
-    }
+    frameIndices.forEach((frameNum, arrayIndex) => {
+      const promise = new Promise((resolve) => {
+        const img = new Image();
+        const paddedIndex = frameNum.toString().padStart(3, '0');
+        img.src = `/sequence/ezgif-frame-${paddedIndex}.jpg`;
+        
+        img.onload = () => {
+          loadedCount++;
+          if (onLoadProgress) {
+            onLoadProgress(Math.round((loadedCount / totalLoadedFrames) * 100));
+          }
+          resolve(img);
+        };
+        img.onerror = () => {
+          loadedCount++;
+          if (onLoadProgress) onLoadProgress(Math.round((loadedCount / totalLoadedFrames) * 100));
+          resolve(null);
+        };
+        loadedImages[arrayIndex] = img;
+      });
+      promises.push(promise);
+    });
 
     Promise.all(promises).then(() => {
-        setImages(loadedImages);
+      setImages(loadedImages);
     });
   }, []);
 
-  // 2. The "Cover" Logic Draw Function
-  const renderFrame = (index) => {
+  // Optimized render with "cover" logic
+  const renderFrame = useCallback((index) => {
     const canvas = canvasRef.current;
     if (!canvas || images.length === 0) return;
     
-    const ctx = canvas.getContext('2d');
+    const roundedIndex = Math.round(index);
     
-    // Get the image for the current frame
-    const img = images[Math.round(index)];
+    // Skip if same frame as last render (avoid redundant draws)
+    if (roundedIndex === lastFrameRef.current) return;
+    lastFrameRef.current = roundedIndex;
+    
+    const ctx = canvas.getContext('2d');
+    const img = images[roundedIndex];
     
     if (img) {
-        const canvasWidth = canvas.width;
-        const canvasHeight = canvas.height;
-        
-        // Calculate scale needed to COVER the canvas
-        // This acts exactly like CSS object-fit: cover
-        const scale = Math.max(canvasWidth / img.width, canvasHeight / img.height);
-        
-        const x = (canvasWidth / 2) - (img.width / 2) * scale;
-        const y = (canvasHeight / 2) - (img.height / 2) * scale;
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
+      
+      // Calculate scale for "cover" behavior
+      const scale = Math.max(canvasWidth / img.width, canvasHeight / img.height);
+      const x = (canvasWidth / 2) - (img.width / 2) * scale;
+      const y = (canvasHeight / 2) - (img.height / 2) * scale;
 
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
     }
-  };
+  }, [images]);
 
-  // 3. Handle Canvas Resizing for High DPI / Responsiveness
+  // RAF-throttled render scheduler
+  const scheduleRender = useCallback((index) => {
+    pendingFrameRef.current = index;
+    
+    if (rafIdRef.current === null) {
+      rafIdRef.current = requestAnimationFrame(() => {
+        if (pendingFrameRef.current !== null) {
+          renderFrame(pendingFrameRef.current);
+        }
+        rafIdRef.current = null;
+      });
+    }
+  }, [renderFrame]);
+
+  // Cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    };
+  }, []);
+
+  // Handle canvas resizing
   useEffect(() => {
     const handleResize = () => {
-        const canvas = canvasRef.current;
-        if (canvas) {
-            // Set canvas internal resolution to match window size
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            // Re-render current frame immediately after resize
-            // We use the current value from the motion value
-            renderFrame(frameIndex.get());
-        }
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        lastFrameRef.current = -1; // Force redraw after resize
+        renderFrame(frameIndex.get());
+      }
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // Initial sizing
+    handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [images]); // Re-run if images reload (rare) but mostly for the renderFrame access
+  }, [images, renderFrame, frameIndex]);
 
-  // Update frame on scroll
+  // Update frame on scroll using RAF throttling
   useMotionValueEvent(frameIndex, "change", (latest) => {
-    renderFrame(latest);
+    scheduleRender(latest);
   });
   
   // Initial render when images finish loading
   useEffect(() => {
-    if(images.length > 0) renderFrame(frameIndex.get());
-  }, [images]);
+    if (images.length > 0) {
+      lastFrameRef.current = -1; // Force initial render
+      renderFrame(frameIndex.get());
+    }
+  }, [images, renderFrame, frameIndex]);
 
   return (
     <div className="fixed inset-0 z-0 flex items-center justify-center bg-sony-black pointer-events-none">
-         <canvas 
-            ref={canvasRef}
-            className="w-full h-full block" // block removes standard inline-block spacing
-            // Note: We don't set width/height attributes here anymore, 
-            // we handle it in the resize effect for perfect pixel matching.
-         />
+      <canvas 
+        ref={canvasRef}
+        className="w-full h-full block"
+      />
     </div>
   );
 }
