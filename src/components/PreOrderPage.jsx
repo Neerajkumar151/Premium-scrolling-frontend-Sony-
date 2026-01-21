@@ -73,15 +73,36 @@ export default function PreOrderPage() {
   };
 
   return (
-    <div className="bg-black min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white">
-      <Navbar />
+    <div className="relative min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white">
+      
+      {/* --- True Fixed Background Image --- */}
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/sequence/ezgif-frame-001.jpg)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      
+      {/* --- Semi-transparent Dark Overlay (70% opacity) --- */}
+      <div className="fixed inset-0 z-[1] bg-black/60" />
+      
+      {/* --- Subtle Vignette for Premium Feel --- */}
+      <div className="fixed inset-0 z-[2] bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
+      <div className="fixed inset-0 z-[2] bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none" />
 
-      {/* --- HERO SECTION --- */}
-      <section className="relative pt-32 pb-20 px-6 md:px-12 overflow-hidden">
-        
-        {/* Background Atmosphere */}
-        <div className="absolute top-0 left-0 w-full h-[80vh] bg-gradient-to-b from-white/5 via-transparent to-black pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-blue/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="relative z-10">
+        <Navbar />
+
+        {/* --- HERO SECTION --- */}
+        <section className="relative pt-32 pb-20 px-6 md:px-12 overflow-hidden">
+          
+          {/* Background Atmosphere */}
+          <div className="absolute top-0 left-0 w-full h-[80vh] bg-gradient-to-b from-white/5 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-blue/10 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-[1200px] mx-auto relative z-10 text-center">
           
@@ -205,10 +226,10 @@ export default function PreOrderPage() {
             )}
           </ScrollReveal>
 
-        </div>
-      </section>
+          </div>
+        </section>
 
-      
+      </div>
     </div>
   );
 }

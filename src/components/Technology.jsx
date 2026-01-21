@@ -53,13 +53,33 @@ const AnimatedWave = () => (
 
 export default function Technology() {
   return (
-    <div className="bg-black min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white">
+    <div className="relative min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white">
       
-      <Navbar />
+      {/* --- True Fixed Background Image --- */}
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/sequence/ezgif-frame-001.jpg)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      
+      {/* --- Semi-transparent Dark Overlay (70% opacity) --- */}
+      <div className="fixed inset-0 z-[1] bg-black/60" />
+      
+      {/* --- Subtle Vignette for Premium Feel --- */}
+      <div className="fixed inset-0 z-[2] bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
+      <div className="fixed inset-0 z-[2] bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none" />
 
-      {/* --- HERO SECTION --- */}
-      <section className="relative pt-48 pb-32 px-6 md:px-12 overflow-hidden">
-        {/* Abstract Background */}
+      <div className="relative z-10">
+        <Navbar />
+
+        {/* --- HERO SECTION --- */}
+        <section className="relative pt-48 pb-32 px-6 md:px-12 overflow-hidden">
+          {/* Abstract Background */}
         <div className="absolute top-0 right-0 w-[60vw] h-[60vw] bg-accent-blue/5 rounded-full blur-[150px] pointer-events-none -translate-y-1/2 translate-x-1/4" />
         
         <div className="max-w-[1400px] mx-auto relative z-10">
@@ -206,10 +226,10 @@ export default function Technology() {
              </ScrollReveal>
           </div>
 
-        </div>
-      </section>
+          </div>
+        </section>
 
-      
+      </div>
     </div>
   );
 }

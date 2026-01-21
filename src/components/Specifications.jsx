@@ -108,19 +108,26 @@ const SpecCategory = ({ category, items }) => (
 
 export default function Specifications() {
   return (
-    <section className="relative min-h-screen bg-black text-white font-sans selection:bg-accent-blue selection:text-white pb-32">
+    <section className="relative min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white pb-32">
         
-      {/* --- Dynamic Background --- */}
-      <div className="fixed inset-0 z-0">
-        <img 
-          src="/sequence/ezgif-frame-001.jpg" 
-          alt="Sony Headphones Detail" 
-          className="w-full h-full object-cover opacity-60"
-        />
-        {/* Cinematic Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50" />
-      </div>
+      {/* --- True Fixed Background Image --- */}
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/sequence/ezgif-frame-001.jpg)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      
+      {/* --- Semi-transparent Dark Overlay (70% opacity) --- */}
+      <div className="fixed inset-0 z-[1] bg-black/60" />
+      
+      {/* --- Subtle Vignette for Premium Feel --- */}
+      <div className="fixed inset-0 z-[2] bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
+      <div className="fixed inset-0 z-[2] bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none" />
 
       {/* --- Content Container --- */}
       <div className="relative z-10 px-6 md:px-12 max-w-[1400px] mx-auto pt-32 md:pt-48">
@@ -155,7 +162,6 @@ export default function Specifications() {
             />
           ))}
         </div>
-
 
       </div>
     </section>

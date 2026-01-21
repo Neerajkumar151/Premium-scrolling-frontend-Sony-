@@ -142,11 +142,31 @@ export default function BuyPage() {
   };
 
   return (
-    <div className="bg-black min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white">
+    <div className="relative min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white">
       
-      <Navbar />
+      {/* --- True Fixed Background Image --- */}
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/sequence/ezgif-frame-001.jpg)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      
+      {/* --- Semi-transparent Dark Overlay (70% opacity) --- */}
+      <div className="fixed inset-0 z-[1] bg-black/60" />
+      
+      {/* --- Subtle Vignette for Premium Feel --- */}
+      <div className="fixed inset-0 z-[2] bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
+      <div className="fixed inset-0 z-[2] bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none" />
 
-      <main className="max-w-[1400px] mx-auto pt-32 pb-20 px-6 md:px-12">
+      <div className="relative z-10">
+        <Navbar />
+
+        <main className="max-w-[1400px] mx-auto pt-32 pb-20 px-6 md:px-12">
         <div className="grid lg:grid-cols-12 gap-12 xl:gap-24">
           
           {/* --- LEFT COLUMN: Sticky Gallery --- */}
@@ -262,9 +282,10 @@ export default function BuyPage() {
           </div>
 
         </div>
-      </main>
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }
