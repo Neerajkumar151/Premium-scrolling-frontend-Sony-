@@ -1,6 +1,6 @@
 <div align="center">
   <br />
-  <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=2576&auto=format&fit=crop" alt="Sony WH-1000XM5 Experience" width="80%" style="border-radius: 20px; box-shadow: 0 20px 80px -20px rgba(0,0,0,0.8);" />
+  <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=2576&auto=format&fit=crop" alt="Sony WH-1000XM5 Experience" width="80%" height="80%" style="border-radius: 20px; box-shadow: 0 20px 80px -20px rgba(0,0,0,0.8);" />
   <br />
   <br />
 
