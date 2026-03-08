@@ -10,7 +10,7 @@ const CountdownTimer = () => {
 
   useEffect(() => {
     const launchDate = new Date();
-    launchDate.setDate(launchDate.getDate() + 14); 
+    launchDate.setDate(launchDate.getDate() + 14);
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -73,22 +73,22 @@ export default function PreOrderPage() {
 
   return (
     <div className="relative min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white">
-      
+
       {/* --- True Fixed Background Image --- */}
-      <div 
+      <div
         className="fixed inset-0 z-0"
         style={{
-          backgroundImage: 'url(/sequence/ezgif-frame-001.jpg)',
+          backgroundImage: 'url(/sequence/ezgif-frame-001.webp)',
           backgroundAttachment: 'fixed',
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
       />
-      
+
       {/* --- Semi-transparent Dark Overlay (70% opacity) --- */}
       <div className="fixed inset-0 z-[1] bg-black/70" />
-      
+
       {/* --- Subtle Vignette for Premium Feel --- */}
       <div className="fixed inset-0 z-[2] bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
       <div className="fixed inset-0 z-[2] bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none" />
@@ -98,13 +98,13 @@ export default function PreOrderPage() {
 
         {/* --- HERO SECTION --- */}
         <section className="relative pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 md:px-12 overflow-hidden">
-          
+
           {/* Background Atmosphere */}
           <div className="absolute top-0 left-0 w-full h-[60vh] sm:h-[70vh] md:h-[80vh] bg-gradient-to-b from-white/5 via-transparent to-transparent pointer-events-none" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[450px] md:w-[600px] h-[300px] sm:h-[450px] md:h-[600px] bg-accent-blue/10 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] pointer-events-none" />
 
           <div className="max-w-[1200px] mx-auto relative z-10 text-center">
-            
+
             <ScrollReveal>
               <span className="inline-block py-1 px-3 rounded-full border border-accent-blue/30 bg-accent-blue/10 text-accent-blue text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6">
                 Limited First Edition
@@ -119,7 +119,7 @@ export default function PreOrderPage() {
 
             <ScrollReveal delay={0.2}>
               <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-xl sm:max-w-2xl mx-auto mb-10 sm:mb-12 md:mb-16 font-light leading-relaxed px-4">
-                Secure your WH-1000XM5 First Edition. Includes exclusive colorway, 
+                Secure your WH-1000XM5 First Edition. Includes exclusive colorway,
                 custom engraving, and priority shipping.
               </p>
             </ScrollReveal>
@@ -135,16 +135,16 @@ export default function PreOrderPage() {
         {/* --- PRODUCT SHOWCASE --- */}
         <section className="relative py-12 sm:py-16 md:py-20">
           <div className="absolute inset-0 bg-white/5 -skew-y-3 transform origin-top-left z-0" />
-          
+
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 relative z-10">
             <ScrollReveal className="relative aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9] rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
-              <img 
-                src="/sequence/ezgif-frame-001.jpg" 
-                alt="Product Close up" 
+              <img
+                src="/sequence/ezgif-frame-001.webp"
+                alt="Product Close up"
                 className="w-full h-full object-cover opacity-80"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-              
+
               <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 md:bottom-16 md:left-16 lg:bottom-24 lg:left-24 max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4">Midnight Blue Collection.</h3>
                 <p className="text-sm sm:text-base md:text-lg text-white/70">Exclusive to pre-order customers. A deep, iridescent finish that absorbs light.</p>
@@ -161,20 +161,20 @@ export default function PreOrderPage() {
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            <BenefitCard 
-              icon={Zap} 
-              title="Priority Access" 
-              desc="Skip the line. Your order ships 48 hours before the official global release." 
+            <BenefitCard
+              icon={Zap}
+              title="Priority Access"
+              desc="Skip the line. Your order ships 48 hours before the official global release."
             />
-            <BenefitCard 
-              icon={Gift} 
-              title="Exclusive Merch" 
-              desc="Receive a limited edition hard-shell carrying case and braided cables." 
+            <BenefitCard
+              icon={Gift}
+              title="Exclusive Merch"
+              desc="Receive a limited edition hard-shell carrying case and braided cables."
             />
-            <BenefitCard 
-              icon={Shield} 
-              title="Extended Care" 
-              desc="Complimentary 1-year extension on your warranty, exclusively for pre-orders." 
+            <BenefitCard
+              icon={Shield}
+              title="Extended Care"
+              desc="Complimentary 1-year extension on your warranty, exclusively for pre-orders."
             />
           </div>
         </section>
@@ -182,7 +182,7 @@ export default function PreOrderPage() {
         {/* --- RESERVATION FORM --- */}
         <section className="py-16 sm:py-24 md:py-32 bg-white/5 border-t border-white/10">
           <div className="max-w-[800px] mx-auto px-4 sm:px-6 text-center">
-            
+
             <ScrollReveal>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-6 sm:mb-8">
                 Reserve Your Spot.
@@ -201,24 +201,24 @@ export default function PreOrderPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4">
                   <div className="relative">
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email address" 
+                      placeholder="Enter your email address"
                       required
                       className="w-full bg-black border border-white/20 rounded-full py-4 sm:py-5 px-6 sm:px-8 text-base sm:text-lg focus:outline-none focus:border-accent-blue focus:ring-1 focus:ring-accent-blue transition-all"
                     />
                   </div>
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="group w-full bg-white text-black rounded-full py-4 sm:py-5 text-base sm:text-lg font-bold hover:bg-accent-blue transition-all duration-300 flex items-center justify-center gap-2"
                   >
                     Reserve Now
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                   <p className="text-[10px] sm:text-xs text-white/30 mt-3 sm:mt-4">
-                    By reserving, you agree to receive updates about this product launch. 
+                    By reserving, you agree to receive updates about this product launch.
                     <a href="#" className="underline ml-1">Privacy Policy</a>
                   </p>
                 </form>

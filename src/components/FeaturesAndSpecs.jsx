@@ -4,11 +4,10 @@ import ScrollReveal from './ScrollReveal';
 
 const PremiumFeatureCard = ({ title, description, highlight }) => (
   <ScrollReveal
-    className={`group relative overflow-hidden rounded-2xl sm:rounded-[2rem] p-6 sm:p-8 md:p-10 transition-all duration-500 hover:bg-white/[0.08] ${
-      highlight
+    className={`group relative overflow-hidden rounded-2xl sm:rounded-[2rem] p-6 sm:p-8 md:p-10 transition-all duration-500 hover:bg-white/[0.08] ${highlight
         ? "md:col-span-2 bg-white/[0.06] border border-white/15 backdrop-blur-xl"
         : "bg-white/[0.03] border border-white/10 backdrop-blur-lg"
-    }`}
+      }`}
   >
     <div className="relative z-10 h-full flex flex-col justify-between">
       <div>
@@ -19,15 +18,15 @@ const PremiumFeatureCard = ({ title, description, highlight }) => (
           {description}
         </p>
       </div>
-      
+
       <div className="mt-6 sm:mt-8 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out">
         <span className="text-accent-blue text-xl sm:text-2xl">→</span>
       </div>
     </div>
 
-    <div 
+    <div
       className={`absolute inset-0 bg-gradient-to-br transition-opacity duration-700 pointer-events-none opacity-0 group-hover:opacity-100
-      ${highlight ? "from-accent-blue/10 via-transparent to-transparent" : "from-white/5 via-transparent to-transparent"}`} 
+      ${highlight ? "from-accent-blue/10 via-transparent to-transparent" : "from-white/5 via-transparent to-transparent"}`}
     />
   </ScrollReveal>
 );
@@ -36,7 +35,7 @@ const PremiumFeatureCard = ({ title, description, highlight }) => (
 const EditorialSection = ({ title, description, align = "left" }) => {
   return (
     <div className={`py-16 sm:py-24 md:py-32 grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center border-t border-white/10`}>
-      
+
       <ScrollReveal className={`${align === "right" ? "md:order-2" : ""} space-y-4 sm:space-y-6 md:space-y-8`}>
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70 leading-[1.1]">
           {title}
@@ -45,13 +44,13 @@ const EditorialSection = ({ title, description, align = "left" }) => {
           {description}
         </p>
       </ScrollReveal>
-      
-      <ScrollReveal 
+
+      <ScrollReveal
         delay={0.2}
         className={`${align === "right" ? "md:order-1" : ""} group relative rounded-2xl sm:rounded-[2.5rem] overflow-hidden h-[300px] sm:h-[400px] md:h-[500px] border border-white/10 bg-zinc-900`}
       >
         <motion.img
-          src={`/images/features/${align === "right" ? "feature2.jpeg" : "feature1.jpeg"}`}
+          src={`/images/features/${align === "right" ? "feature2.webp" : "feature1.webp"}`}
           alt=""
           loading="lazy"
           className="w-full h-full object-cover opacity-80 group-hover:scale-[1.15] transition-transform duration-[1.5s] ease-out"
@@ -79,7 +78,7 @@ const SpecBlock = ({ label, value }) => (
 export default function FeaturesAndSpecs() {
   return (
     <div className="relative z-20 bg-sony-black min-h-screen overflow-hidden">
-      
+
       {/* Ambient Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] md:w-[1000px] h-[300px] sm:h-[400px] md:h-[500px] bg-accent-blue/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[400px] sm:w-[600px] md:w-[800px] h-[300px] sm:h-[450px] md:h-[600px] bg-accent-cyan/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] pointer-events-none" />
@@ -103,7 +102,7 @@ export default function FeaturesAndSpecs() {
         <div className="space-y-12 sm:space-y-16 md:space-y-24">
           <ScrollReveal className="text-center max-w-4xl mx-auto space-y-4 sm:space-y-6 md:space-y-8">
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter text-white leading-none">
-              Everything you expect.<br/>
+              Everything you expect.<br />
               <span className="text-white/40">And more.</span>
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-white/60 font-light max-w-xl sm:max-w-2xl mx-auto leading-relaxed">
@@ -138,13 +137,13 @@ export default function FeaturesAndSpecs() {
 
         {/* Detailed Editorial Sections */}
         <div className="space-y-8 sm:space-y-12">
-          <EditorialSection 
-            title="Sound developed by artists." 
+          <EditorialSection
+            title="Sound developed by artists."
             description="We partnered with Music Studios to deliver a sound experience exactly as the artist intended. LDAC transmits approximately three times more data than conventional Bluetooth audio for exceptional quality."
             align="left"
           />
-          <EditorialSection 
-            title="Comfort for every ear." 
+          <EditorialSection
+            title="Comfort for every ear."
             description="A newly developed soft-fit leather covers the earcups, realizing a comfortable fit with less pressure on the ears while keeping out external sounds. Wear them all day without fatigue."
             align="right"
           />
@@ -159,13 +158,13 @@ export default function FeaturesAndSpecs() {
           <div className="grid sm:grid-cols-2 gap-x-8 sm:gap-x-12 md:gap-x-20 gap-y-1 sm:gap-y-2">
             <SpecBlock label="Type" value="Closed-back, dynamic" />
             <SpecBlock label="Bluetooth" value="Version 5.3" />
-            
+
             <SpecBlock label="Driver" value="30 mm dome-type" />
             <SpecBlock label="Battery life" value="Up to 30 hours" />
-            
+
             <SpecBlock label="Freq Response" value="4 Hz–40 kHz" />
             <SpecBlock label="Charging" value="Approx. 3.5 hours" />
-            
+
             <SpecBlock label="Weight" value="Approx. 250 g" />
             <SpecBlock label="Processor" value="Integrated V1" />
           </div>
@@ -176,7 +175,7 @@ export default function FeaturesAndSpecs() {
           <div className="absolute inset-0 bg-gradient-to-b from-accent-blue/5 to-transparent pointer-events-none" />
 
           <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter text-white leading-[0.9]">
-            Everything you need.<br/>
+            Everything you need.<br />
             <span className="text-white/30">Nothing you don't.</span>
           </h2>
           <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-4 sm:pt-8">

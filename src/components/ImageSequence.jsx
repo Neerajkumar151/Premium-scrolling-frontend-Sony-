@@ -17,65 +17,6 @@
 
 //   useEffect(() => {
 //     const loadedImages = [];
-//     const promises = [];
-
-//     for (let i = 1; i <= frameCount; i++) {
-//         const promise = new Promise((resolve) => {
-//             const img = new Image();
-//             const paddedIndex = i.toString().padStart(3, '0');
-//             img.src = `/sequence/ezgif-frame-${paddedIndex}.jpg`;
-//             img.onload = () => resolve(img);
-//             loadedImages.push(img);
-//         });
-//         promises.push(promise);
-//     }
-
-//     Promise.all(promises).then(() => {
-//         setImages(loadedImages);
-//     });
-//   }, []);
-
-//   const renderFrame = (index) => {
-//     const canvas = canvasRef.current;
-//     if (!canvas || images.length === 0) return;
-//     const ctx = canvas.getContext('2d');
-    
-//     // Clear? Not strictly needed if drawing full opaque frame
-//     const img = images[Math.round(index)];
-//     if (img) {
-//         // Maintain aspect ratio or cover? "object-contain" usually implies "fit"
-//         // But for canvas, we draw image to fill or fit.
-//         // Let's draw it to fill height/width nicely.
-//         // Assuming 16:9 images.
-//         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-//         // Draw image centered and scaled to cover or contain
-//         // Let's do simple draw for now 
-//         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-//     }
-//   };
-
-//   useMotionValueEvent(frameIndex, "change", (latest) => {
-//     renderFrame(latest);
-//   });
-  
-//   // Initial render when images load
-//   useEffect(() => {
-//     if(images.length > 0) renderFrame(frameIndex.get());
-//   }, [images]);
-
-//   return (
-//     <div className="fixed inset-0 z-0 flex items-center justify-center bg-sony-black pointer-events-none">
-//          <canvas 
-//             ref={canvasRef}
-//             className="w-full h-full object-contain md:object-cover"
-//             width={1280} 
-//             height={720}
-//          />
-//     </div>
-//   );
-// }
-
 
 
 
@@ -122,7 +63,7 @@ export default function ImageSequence({ containerRef, onLoadProgress }) {
       const promise = new Promise((resolve) => {
         const img = new Image();
         const paddedIndex = frameNum.toString().padStart(3, '0');
-        img.src = `/sequence/ezgif-frame-${paddedIndex}.jpg`;
+        img.src = `/sequence/ezgif-frame-${paddedIndex}.webp`;
         
         img.onload = () => {
           loadedCount++;

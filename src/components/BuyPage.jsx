@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar';  
+import Navbar from './Navbar';
 import ScrollReveal from './ScrollReveal';
 import { Star, Truck, ShieldCheck, Box, Check } from 'lucide-react';
 
@@ -14,9 +14,9 @@ const product = {
 };
 
 const colors = [
-  { name: "Midnight Black", hex: "#1a1a1a", img: "/sequence/ezgif-frame-001.jpg" }, 
-  { name: "Platinum Silver", hex: "#e2e2e2", img: "/images/features/silver.png" },
-  { name: "Midnight Blue", hex: "#1e3a8a", img: "/images/features/blue.png" }
+  { name: "Midnight Black", hex: "#1a1a1a", img: "/sequence/ezgif-frame-001.webp" },
+  { name: "Platinum Silver", hex: "#e2e2e2", img: "/images/features/silver.webp" },
+  { name: "Midnight Blue", hex: "#1e3a8a", img: "/images/features/blue.webp" }
 ];
 
 const financeOptions = [
@@ -37,31 +37,31 @@ const ImageMagnifier = ({ src, alt }) => {
   };
 
   return (
-    <div 
+    <div
       className="relative w-full h-full overflow-hidden cursor-crosshair group"
       onMouseEnter={() => setShowMagnifier(true)}
       onMouseLeave={() => setShowMagnifier(false)}
       onMouseMove={handleMouseMove}
     >
-      <img 
-        src={src} 
-        alt={alt} 
+      <img
+        src={src}
+        alt={alt}
         className="w-full h-full object-cover block"
       />
 
       {/* Magnifying Lens - Hidden on touch devices */}
-      <div 
+      <div
         className="pointer-events-none absolute border border-white/20 rounded-full shadow-2xl bg-black hidden md:block"
         style={{
           display: showMagnifier ? 'block' : 'none',
-          width: '200px', 
+          width: '200px',
           height: '200px',
           top: `${cursorPosition.y * 100}%`,
           left: `${cursorPosition.x * 100}%`,
           transform: 'translate(-50%, -50%)',
           backgroundImage: `url(${src})`,
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '600%', 
+          backgroundSize: '600%',
           backgroundPosition: `${cursorPosition.x * 100}% ${cursorPosition.y * 100}%`,
           zIndex: 50
         }}
@@ -73,13 +73,13 @@ const ImageMagnifier = ({ src, alt }) => {
 // --- Sub-Components ---
 
 const ColorSwatch = ({ color, isSelected, onClick }) => (
-  <button 
+  <button
     onClick={onClick}
     className={`group relative w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300 ${isSelected ? 'ring-2 ring-white ring-offset-2 ring-offset-black' : 'hover:scale-110'}`}
     aria-label={`Select ${color.name}`}
   >
-    <span 
-      className="w-full h-full rounded-full shadow-inner border border-white/10" 
+    <span
+      className="w-full h-full rounded-full shadow-inner border border-white/10"
       style={{ backgroundColor: color.hex }}
     />
     {isSelected && (
@@ -91,13 +91,12 @@ const ColorSwatch = ({ color, isSelected, onClick }) => (
 );
 
 const OptionCard = ({ selected, onSelect, option }) => (
-  <div 
+  <div
     onClick={() => onSelect(option.id)}
-    className={`cursor-pointer p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl border transition-all duration-300 relative overflow-hidden group ${
-      selected === option.id 
-        ? 'border-accent-blue bg-accent-blue/10' 
-        : 'border-white/10 hover:border-white/30 bg-white/5'
-    }`}
+    className={`cursor-pointer p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl border transition-all duration-300 relative overflow-hidden group ${selected === option.id
+      ? 'border-accent-blue bg-accent-blue/10'
+      : 'border-white/10 hover:border-white/30 bg-white/5'
+      }`}
   >
     <div className="flex justify-between items-center relative z-10">
       <div>
@@ -135,22 +134,22 @@ export default function BuyPage() {
 
   return (
     <div className="relative min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white">
-      
+
       {/* --- True Fixed Background Image --- */}
-      <div 
+      <div
         className="fixed inset-0 z-0"
         style={{
-          backgroundImage: 'url(/sequence/ezgif-frame-001.jpg)',
+          backgroundImage: 'url(/sequence/ezgif-frame-001.webp)',
           backgroundAttachment: 'fixed',
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
       />
-      
+
       {/* --- Semi-transparent Dark Overlay (70% opacity) --- */}
       <div className="fixed inset-0 z-[1] bg-black/70" />
-      
+
       {/* --- Subtle Vignette for Premium Feel --- */}
       <div className="fixed inset-0 z-[2] bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
       <div className="fixed inset-0 z-[2] bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none" />
@@ -160,18 +159,18 @@ export default function BuyPage() {
 
         <main className="max-w-[1400px] mx-auto pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 md:px-12">
           <div className="grid lg:grid-cols-12 gap-8 sm:gap-10 md:gap-12 xl:gap-24">
-            
+
             {/* --- LEFT COLUMN: Sticky Gallery --- */}
             <div className="lg:col-span-7 relative">
               <div className="lg:sticky lg:top-32 space-y-6 sm:space-y-8">
-                
+
                 {/* Main Image Display with Magnifier */}
                 <ScrollReveal className="relative w-full aspect-square rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-white/5 border border-white/10 group z-10">
-                  <ImageMagnifier 
-                    src={selectedColor.img} 
-                    alt={product.name} 
+                  <ImageMagnifier
+                    src={selectedColor.img}
+                    alt={product.name}
                   />
-                  
+
                   {/* Floating Badge */}
                   <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 bg-black/40 backdrop-blur-md border border-white/10 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 sm:gap-2 pointer-events-none z-20">
                     <Star size={12} className="text-accent-blue fill-accent-blue" />
@@ -196,7 +195,7 @@ export default function BuyPage() {
 
             {/* --- RIGHT COLUMN: Configuration --- */}
             <div className="lg:col-span-5 flex flex-col gap-6 sm:gap-8 md:gap-10">
-              
+
               <ScrollReveal>
                 <span className="text-accent-blue font-mono text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-2 block">New Arrival</span>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-2">{product.name}</h1>
@@ -211,11 +210,11 @@ export default function BuyPage() {
                 </h3>
                 <div className="flex gap-4 sm:gap-6">
                   {colors.map((color) => (
-                    <ColorSwatch 
-                      key={color.name} 
-                      color={color} 
-                      isSelected={selectedColor.name === color.name} 
-                      onClick={() => setSelectedColor(color)} 
+                    <ColorSwatch
+                      key={color.name}
+                      color={color}
+                      isSelected={selectedColor.name === color.name}
+                      onClick={() => setSelectedColor(color)}
                     />
                   ))}
                 </div>
@@ -228,11 +227,11 @@ export default function BuyPage() {
                 </h3>
                 <div className="space-y-3 sm:space-y-4">
                   {financeOptions.map((option) => (
-                    <OptionCard 
+                    <OptionCard
                       key={option.id}
-                      option={option} 
-                      selected={selectedFinance} 
-                      onSelect={setSelectedFinance} 
+                      option={option}
+                      selected={selectedFinance}
+                      onSelect={setSelectedFinance}
                     />
                   ))}
                 </div>
@@ -258,13 +257,13 @@ export default function BuyPage() {
                   </div>
                 </div>
 
-                <button 
+                <button
                   onClick={handleAddToCart}
                   className={`w-full py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold tracking-wide transition-all duration-800 relative overflow-hidden ${isAdded ? 'bg-green-500 text-black scale-95' : 'bg-white text-black hover:bg-accent-blue hover:scale-[1.02]'}`}
                 >
                   {isAdded ? "Added to Bag" : "Add to Bag"}
                 </button>
-                
+
                 <p className="text-center text-[9px] sm:text-[10px] text-white/30">
                   Need help? <a href="#" className="underline hover:text-white">Chat with a Specialist</a>
                 </p>

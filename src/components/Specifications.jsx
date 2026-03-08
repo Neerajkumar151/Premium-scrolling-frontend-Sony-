@@ -84,7 +84,7 @@ const SpecCategory = ({ category, items }) => (
       */}
       <div className="contents lg:block lg:col-span-4 xl:col-span-3">
         <div className="sticky top-24 lg:top-32 z-20 -mx-4 px-4 lg:mx-0 lg:px-0 mb-8 lg:mb-0">
-          
+
           {/* Glass Container */}
           <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-black/60 lg:bg-black/20 backdrop-blur-xl border border-white/10 overflow-hidden shadow-lg">
             <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
@@ -121,19 +121,19 @@ const SpecCategory = ({ category, items }) => (
 export default function Specifications() {
   return (
     <section className="relative min-h-screen text-white font-sans selection:bg-accent-blue selection:text-white pb-16 sm:pb-24 md:pb-32">
-        
+
       {/* --- Fixed Background --- */}
-      <div 
+      <div
         className="fixed inset-0 z-0"
         style={{
-          backgroundImage: 'url(/sequence/ezgif-frame-001.jpg)', // Ensure this path is correct
+          backgroundImage: 'url(/sequence/ezgif-frame-001.webp)', // Ensure this path is correct
           backgroundAttachment: 'fixed',
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
       />
-      
+
       {/* --- Overlays --- */}
       <div className="fixed inset-0 z-[1] bg-black/70" />
       <div className="fixed inset-0 z-[2] bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
@@ -141,7 +141,7 @@ export default function Specifications() {
 
       {/* --- Content Container --- */}
       <div className="relative z-10 px-4 sm:px-6 md:px-12 max-w-[1400px] mx-auto pt-24 sm:pt-32 md:pt-48">
-        
+
         {/* Header */}
         <header className="mb-16 sm:mb-24 md:mb-32 lg:mb-48 border-b border-white/10 pb-8 sm:pb-10 md:pb-12">
           <ScrollReveal>
@@ -156,7 +156,7 @@ export default function Specifications() {
           </ScrollReveal>
           <ScrollReveal delay={0.2} className="flex justify-start md:justify-end mt-6 sm:mt-8">
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/60 max-w-lg md:max-w-xl text-left md:text-right font-light leading-relaxed">
-              Precision engineering meets acoustic purity. <br className="hidden sm:block"/>
+              Precision engineering meets acoustic purity. <br className="hidden sm:block" />
               Dive into the details of industry-leading silence.
             </p>
           </ScrollReveal>
@@ -165,10 +165,10 @@ export default function Specifications() {
         {/* Specs List */}
         <div className="space-y-0"> {/* Removed vertical spacing to rely on padding inside categories for better sticky flow */}
           {specsData.map((section, idx) => (
-            <SpecCategory 
-              key={idx} 
-              category={section.category} 
-              items={section.items} 
+            <SpecCategory
+              key={idx}
+              category={section.category}
+              items={section.items}
             />
           ))}
         </div>
