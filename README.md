@@ -1,7 +1,7 @@
 <div align="center">
   <br />
   <img
-  src="/public/sequence/ezgif-frame-001.jpg"
+  src="/public/sequence/ezgif-frame-001.webp"
   alt="Sony WH-1000XM5 Experience"
   style="
     width: 100%;
